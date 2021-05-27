@@ -47,15 +47,15 @@ export default {
       postContent:null,
     };
   },
-  props: { newsid: String },
+  props: { dataid: String },
   created() {
     //   console.log(this.newsid);
     this.getComments();
   },
   methods: {
     getComments() {
-      let url = "http://localhost:9001/NewsCommentList";
-      let params = { newsId: this.newsid, pageIndex: this.pageIndex };
+      let url = "NewsCommentList";
+      let params = { dataid: this.dataid, pageIndex: this.pageIndex };
 
       this.axios
         .get(url, params)
@@ -90,7 +90,7 @@ export default {
         add_time: moment().format('YYYY-MM-DD HH:mm:ss')
       };
 
-      let url ='http://localhost:9001/PostComment'
+      let url ='PostComment'
 
       this.axios
       .post(url,postComment)

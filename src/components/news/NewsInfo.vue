@@ -14,7 +14,7 @@
     <div class="content" v-html="NewsInfo.content"></div>
     
     <!-- 评论子组件区域 -->
-    <comment :newsid="this.id"></comment>
+    <comment :dataid="this.id"></comment>
   </div>
 </template>
 
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     getNewsInfo() {
-      let url = "http://localhost:9001/NewsInfo";
+      let url = "NewsInfo";
       let params = { id: this.id };
 
       this.axios

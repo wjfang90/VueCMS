@@ -14,6 +14,8 @@ import photoInfo from './components/photos/PhotoInfo.vue';
 
 import goodsList from './components/goods/GoodsList.vue';
 import goodsInfo from './components/goods/GoodsInfo.vue';
+import goodsInfoDesc from './components/goods/GoodsInfoDesc.vue';
+import goodsComment from './components/goods/GoodsComment.vue';
 
 const router = new VueRouter({
     routes: [
@@ -31,6 +33,8 @@ const router = new VueRouter({
 
         { path: '/Home/GoodsList', component: goodsList },
         { path: '/Home/GoodsInfo/:goodsId', component: goodsInfo ,name:'GoodsInfo'},
+        { path: '/Home/GoodsInfoDesc/:goodsId', component: goodsInfoDesc ,name:'GoodsInfoDesc'},
+        { path: '/Home/GoodsComment/:goodsId', component: goodsComment },
 
     ],
     linkActiveClass: 'mui-active'//设置router 当前访问path的样式名

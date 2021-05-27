@@ -17,6 +17,8 @@ const urls = {
 
     goodsList: 'http://localhost:9001/GoodsList',
     goodsInfo: 'http://localhost:9001/GoodsInfo',
+    goodsInfoSwipes:'http://localhost:9001/GoodsInfoSwipes',
+    goodsInfoDesc:'http://localhost:9001/GoodsInfoDesc',
 
 };
 
@@ -24,7 +26,7 @@ let homeSwipesTmp={
     total:10,
     'rows|5':[
         {
-            'size|1': ['250x250', '240x400', '300x250']
+            src:'/images/swipe/@integer(1,3).jpg'
         }
     ]
 }
@@ -137,7 +139,23 @@ let goodsInfoTmp = {
     add_time: '@datetime'
 };
 
-Mock.mock(urls.swipes,)
+let goodsInfoSwipesTmp={
+    total:10,
+    'rows|4':[
+        {
+            src:'/images/goods/swipes/@integer(1,4).jpg'
+        }
+    ]
+};
+
+let goodsInfoDescTmp={
+    'id|+1': 1,
+    goods_no:"@datetime('yyyyMMdd')@integer(10000,90000)",
+    title: '@ctitle(20,40)',
+    content: "@cparagraph(20,100)",
+}
+
+Mock.mock(urls.homeSwipes,homeSwipesTmp);
 
 Mock.mock(urls.newsList, newsListTmp);
 Mock.mock(urls.newsInfo, newsInfoTmp);
@@ -154,3 +172,5 @@ Mock.mock(urls.photoThumbnailList, photoThumbnailListTmp);
 
 Mock.mock(urls.goodsList, goodsListTmp);
 Mock.mock(urls.goodsInfo,goodsInfoTmp);
+Mock.mock(urls.goodsInfoSwipes,goodsInfoSwipesTmp);
+Mock.mock(urls.goodsInfoDesc,goodsInfoDescTmp);

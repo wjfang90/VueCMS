@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     getGoodsList() {
-      let url = "http://localhost:9001/GoodsList";
+      let url = "GoodsList";
       this.axios
         .get(url)
         .then((res) => {

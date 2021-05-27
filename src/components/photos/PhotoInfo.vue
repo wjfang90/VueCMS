@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     getPhotoInfo() {
-      let url = "http://localhost:9001/PhotoInfo";
+      let url = "PhotoInfo";
       let param = { photoId: this.photoId };
 
       this.axios
@@ -51,7 +51,7 @@ export default {
         });
     },
     getThumbnailList() {
-      let url = "http://localhost:9001/PhotoThumbnailList";
+      let url = "PhotoThumbnailList";
       let param = { photoId: this.photoId };
 
       this.axios

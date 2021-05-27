@@ -7,6 +7,7 @@ import VueAxios from 'vue-axios';
 Vue.use(VueAxios,axios);
 
 axios.defaults.baseURL = 'http://localhost:9001';
+axios.defaults.withCredentials = true;//允许跨域携带cookie信息
 
 
 import VueRouter from 'vue-router'; //导入vue-router

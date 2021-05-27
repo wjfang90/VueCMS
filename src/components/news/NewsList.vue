@@ -73,7 +73,7 @@ export default {
         });
     },
     getNewsListByMock() {
-      let url = "http://localhost:9001/NewsList";
+      let url = "NewsList";
       let params = { pageIndex: this.pageIndex };
       
       this.axios

@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     getPhotoCateList() {
-      let url = "http://localhost:9001/PhotoCateList";
+      let url = "PhotoCateList";
       this.axios
         .get(url)
         .then((res) => {
@@ -82,7 +82,7 @@ export default {
         });
     },
     getPhotoListByCate(categoryId) {
-      let url = "http://localhost:9001/PhotoList";
+      let url = "PhotoList";
       let params = { cateId: categoryId };
 
       this.axios

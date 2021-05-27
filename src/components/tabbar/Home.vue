@@ -6,7 +6,8 @@
       <mt-swipe-item> <img src="../../images/swipe/2.jpg" /></mt-swipe-item>
       <mt-swipe-item> <img src="../../images/swipe/3.jpg" /></mt-swipe-item>
     </mt-swipe> -->
-    <swipe :imageurls="imageUrls"></swipe>
+    <!--轮播图组件  属性 imageurls 是组件中的数据-->
+    <swipe :imageurls="imageUrls" :isfullwidth='true'></swipe>
 
     <!-- 九宫格 到 6宫格 的改造工程 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -55,16 +56,16 @@ import swipe from "../subComponents/Swipe.vue";
 export default {
   data() {
     return {
-      imageUrls: [
-        "../../images/swipe/1.jpg",
-        // "../../images/swipe/2.jpg",
-        // "../../images/swipe/3.jpg"
-      ],
+      imageUrls: [],
     };
   },
+  created(){
+    this.getSwipes();
+  },
   methods: {
+    //加载轮播图数据
     getSwipes(){
-      let url='http://localhost:9001/GetSwipes'
+      let url='HomeSwipes'
       this.axios
       .get(url)
       .then(res=>{
