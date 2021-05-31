@@ -2,9 +2,9 @@
   <div class="app-container">
     <!--header -->
     <mt-header fixed title="vue cms">
-      <router-link slot="left" to="/">
+      <span slot="left" v-show="goBackFlag">
         <mt-button icon="back" @click="goback">返回</mt-button>
-      </router-link>
+      </span>
     </mt-header>
 
     <!--content -->
@@ -24,7 +24,7 @@
       </router-link>
       <router-link class="mui-tab-item-fang" to="/ShoppingCart">
         <span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-          <span class="mui-badge" id="badge">0</span>
+          <span class="mui-badge" id="badge">{{this.$store.getters.shoppingCarCount}}</span>
         </span>
         <span class="mui-tab-label">购物车</span>
       </router-link>
@@ -38,6 +38,14 @@
 
 <script>
 export default {
+  data() {
+    return {
+      goBackFlag: false,
+    };
+  },
+  created() {
+    this.goBackFlag = this.$route.path == "/Home" ? false : true;
+  },
   name: "App",
   methods: {
     goback() {
@@ -45,6 +53,15 @@ export default {
     },
   },
   components: {},
+  watch: {
+    "$route.path": function (newValue) {
+      if (newValue == "/Home") {
+        this.goBackFlag = false;
+      } else {
+        this.goBackFlag = true;
+      }
+    },
+  },
 };
 </script>
 

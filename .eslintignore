@@ -1,6 +1,6 @@
 {
     # gitignore 语法
     # 忽略 mui中的js 使用严格模式
-    lib/mui/js/mui.js
-    lib/mui/js/mui.min.js
+    src/lib/mui/js/mui.js
+    src/lib/mui/js/mui.min.js
 }

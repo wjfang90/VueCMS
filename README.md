@@ -135,3 +135,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     https://www.npmjs.com/package/vue-preview
 
 ## 绘制 商品列表 页面基本结构并美化
+
+## 商品明细页 
+1. 轮播图组件与首页轮播图共用  mt-swipe 
+    宽度样式问题 
+2. 商品数量使用数字选择框组件 mui-numbox
+    父子组件传值
+    numbox动态设置最大值
+3. 加入购物车
+       动画效果
+       加入购物车数量保存到vuex.store中，解决多个组件传递的问题  npm i vuex -save
+
+

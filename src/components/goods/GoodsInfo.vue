@@ -8,6 +8,7 @@
       @before-enter="beforeEnter"
       @enter="enter"
       @after-enter="afterEnter"
+      @after-leave="addToCarDisabled = false"
     >
       <div class="ball" v-show="ballFlag" ref="ball"></div>
     </transition>
@@ -18,14 +19,26 @@
       <div class="mui-card-content">
         <div class="mui-card-content-inner">
           <p class="price">
-            市场价：<del>￥{{ GoodsInfo.market_price }}</del>&nbsp;&nbsp;销售价：<span class="now_price">￥{{ GoodsInfo.sell_price }}</span>
+            市场价：<del>￥{{ GoodsInfo.market_price }}</del
+            >&nbsp;&nbsp;销售价：<span class="now_price"
+              >￥{{ GoodsInfo.sell_price }}</span
+            >
           </p>
           <p>
-            购买数量：<numbox @getcount="getSelectedCount" :max="GoodsInfo.stock_quantity"></numbox>
+            购买数量：<numbox
+              @getcount="getSelectedCount"
+              :max="GoodsInfo.stock_quantity"
+            ></numbox>
           </p>
           <p class="buy">
             <mt-button type="primary" size="small">立即购买</mt-button>
-            <mt-button type="danger" size="small" @click="addToShopCar">加入购物车</mt-button>
+            <mt-button
+              type="danger"
+              size="small"
+              @click="addToShopCar"
+              :disabled="addToCarDisabled"
+              >加入购物车</mt-button
+            >
             <!-- 分析： 如何实现加入购物车时候，拿到 选择的数量 -->
             <!-- 1. 经过分析发现： 按钮属于 goodsInfo 页面， 数字 属于 numberbox 组件 -->
             <!-- 2. 由于涉及到了父子组件的嵌套了，所以，无法直接在 goodsInfo 页面zhong 中获取到 选中的商品数量值-->
@@ -47,8 +60,16 @@
         </div>
       </div>
       <div class="mui-card-footer">
-        <mt-button type="primary" size="large" plain @click="goodsInfoDesc(GoodsId)">图文介绍</mt-button>
-        <mt-button type="danger" size="large" plain @click="goComment(GoodsId)">商品评论</mt-button>
+        <mt-button
+          type="primary"
+          size="large"
+          plain
+          @click="goodsInfoDesc(GoodsId)"
+          >图文介绍</mt-button
+        >
+        <mt-button type="danger" size="large" plain @click="goComment(GoodsId)"
+          >商品评论</mt-button
+        >
       </div>
     </div>
   </div>
@@ -68,6 +89,7 @@ export default {
       GoodsInfo: {},
       ImageUrls: [],
       ballFlag: false,
+      addToCarDisabled: false,
       selectedCount: 1,
     };
   },
@@ -119,11 +141,24 @@ export default {
     addToShopCar() {
       // 添加到购物车
       this.ballFlag = !this.ballFlag;
+
+      //保存数据到 store
+      var goodsInfo = {
+        GoodsId: this.GoodsId,
+        Title: this.GoodsInfo.title,
+        Count: this.selectedCount,
+        ImgUrl: this.GoodsInfo.img_url,
+        Price: this.GoodsInfo.sell_price,
+        StockQuantity: this.GoodsInfo.stock_quantity,
+        Selected: true,
+      };
+      console.log(goodsInfo);
+      this.$store.commit("addToShoppingCar", goodsInfo);
     },
     //获取商品数量组件中的数据
     getSelectedCount(count) {
       // 当子组件把 选中的数量传递给父组件的时候，把选中的值保存到 data 上
-      this.selectedCount = count;
+      this.selectedCount = parseInt(count);
       // console.log("父组件拿到的数量值为： " + this.selectedCount);
     },
     //商品介绍
@@ -141,6 +176,7 @@ export default {
     },
     beforeEnter(el) {
       el.style.transform = "translate(0, 0)";
+      this.addToCarDisabled = true;
     },
     enter(el, done) {
       el.offsetWidth;
@@ -186,8 +222,8 @@ export default {
   font-weight: bold;
 }
 
-.goodsInfoContainer .buy button{
-  margin-right:10px;
+.goodsInfoContainer .buy button {
+  margin-right: 10px;
 }
 
 .goodsInfoContainer .mui-card-footer {
