@@ -93,6 +93,7 @@ var store = new Vuex.Store({
       //保存到本地存储
       localStorage.setItem('shoppingCar', JSON.stringify(state.shoppingCar));
     },
+    //修改购物车选中商品数量
     UpdateSelectedCount(state, selectItem) {
       state.shoppingCar.some(item => {
         if (item.GoodsId == selectItem.GoodsId) {
